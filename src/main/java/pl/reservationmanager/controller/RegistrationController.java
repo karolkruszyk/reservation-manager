@@ -47,18 +47,29 @@ public class RegistrationController {
             Model theModel) {
 
         String userName = theCrmUser.getUserName();
+        String phoneNumber = theCrmUser.getPhoneNumber();
         logger.info("Processing registration form for: " + userName);
 
         if (theBindingResult.hasErrors()){
             return "signup-page";
         }
 
-        User existing = userService.findByUserName(userName);
-        if (existing != null){
+        User usernameExisting = userService.findByUserName(userName);
+        if (usernameExisting != null){
             theModel.addAttribute("crmUser", new CrmUser());
             theModel.addAttribute("registrationError", "User name already exists.");
 
             logger.warning("User name already exists.");
+
+            return "signup-page";
+        }
+
+        User phoneExisting = userService.findByPhoneNumber(phoneNumber);
+        if (phoneExisting != null){
+            theModel.addAttribute("crmUser", new CrmUser());
+            theModel.addAttribute("registrationError", "Phone number name already exists.");
+
+            logger.warning("Phone number already exists.");
 
             return "signup-page";
         }

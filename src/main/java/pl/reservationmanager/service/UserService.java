@@ -7,6 +7,7 @@ import pl.reservationmanager.user.CrmUser;
 public interface UserService extends UserDetailsService {
 
     User findByUserName(String userName);
+    User findByPhoneNumber(String phoneNumber);
 
     void save(CrmUser crmUser);
 }

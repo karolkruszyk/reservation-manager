@@ -38,6 +38,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public User findByPhoneNumber(String phoneNumber) {
+        return userDao.findByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    @Transactional
     public void save(CrmUser crmUser) {
         User user = new User();
 
