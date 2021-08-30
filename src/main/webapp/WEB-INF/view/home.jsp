@@ -1,5 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <html>
 
@@ -20,29 +22,38 @@
 	</p>
 
 	<security:authorize access="hasRole('MANAGER')">
-
-
-		<p>
-			<a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
-			(Only for Manager peeps)
-		</p>
-
+		<input type="button" value="Add service"
+			   onclick="window.location.href='showServiceForm'; return false;"
+			   class="add-button"
+		/>
 	</security:authorize>
 
 	
 	<security:authorize access="hasRole('ADMIN')">  
 
-		
-		<p>
-			<a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
-			(Only for Admin peeps)
-		</p>
-	
 	</security:authorize>
 	
 	<hr>
-	
+		<h3>Choose the service</h3>
+		<table>
+			<tr>
+				<th><a>Usługa</a></th>
+				<th><a>Cena</a></th>
+				<th><a>Czas trwania</a></th>
+			</tr>
 
+		<c:forEach var="tempService" items="${services}">
+
+			<tr>
+				<td>${tempService.name}</td>
+				<td>${tempService.price} zł</td>
+				<td>${tempService.duration} minut</td>
+
+			</tr>
+		</c:forEach>
+		</table>
+	
+	<hr>
 	<form:form action="${pageContext.request.contextPath}/logout" 
 			   method="POST">
 	
