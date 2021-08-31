@@ -48,4 +48,18 @@ public class ServiceDaoImpl implements ServiceDao{
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(theService);
     }
+
+    @Override
+    public void deleteService(Long theId) {
+        Session session = sessionFactory.getCurrentSession();
+        Service theService = session.get(Service.class, theId);
+        session.delete(theService);
+    }
+
+    @Override
+    public Service getService(Long theId) {
+        Session session = sessionFactory.getCurrentSession();
+        Service theService = session.get(Service.class, theId);
+        return theService;
+    }
 }

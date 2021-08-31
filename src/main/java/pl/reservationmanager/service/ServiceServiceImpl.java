@@ -14,6 +14,12 @@ public class ServiceServiceImpl implements ServiceService{
     ServiceDao serviceDao;
 
     @Override
+    public Service getService(Long theId) {
+        Service theService = serviceDao.getService(theId);
+        return theService;
+    }
+
+    @Override
     @Transactional
     public List<Service> getServices() {
 
@@ -23,5 +29,10 @@ public class ServiceServiceImpl implements ServiceService{
     @Override
     public void addService(Service theService) {
         serviceDao.addService(theService);
+    }
+
+    @Override
+    public void deleteService(Long theId) {
+        serviceDao.deleteService(theId);
     }
 }

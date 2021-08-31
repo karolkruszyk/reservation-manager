@@ -32,7 +32,7 @@ public class RegistrationController {
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @GetMapping("/signup")
+    @RequestMapping ("/signup")
     public String showMyLoginPage(Model theModel) {
 
         theModel.addAttribute("crmUser", new CrmUser());
@@ -40,7 +40,7 @@ public class RegistrationController {
         return "signup-page";
     }
 
-    @PostMapping("/processRegistrationForm")
+    @RequestMapping ("/processRegistrationForm")
     public String processRegistrationForm(
             @Valid @ModelAttribute("crmUser") CrmUser theCrmUser,
             BindingResult theBindingResult,

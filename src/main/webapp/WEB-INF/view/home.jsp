@@ -14,32 +14,40 @@
 	<hr>
 	
 	<p>
+		<h3>Your account details</h3>
 		User: <security:authentication property="principal.username" />
-		<br><br>
+		<br>
 		Role(s): <security:authentication property="principal.authorities" />
-		<br><br>
-		First name: ${user.firstName}, Last name: ${user.lastName}, Phone number: ${user.phoneNumber}
+		<br>
+		First name: ${user.firstName}
+		<br>
+		Last name: ${user.lastName}
+		<br>
+		Phone number: ${user.phoneNumber}
+		<br>
 	</p>
-
+	<hr>
 	<security:authorize access="hasRole('MANAGER')">
-		<input type="button" value="Add service"
-			   onclick="window.location.href='showServiceForm'; return false;"
+		<h3>Options</h3>
+		<br>
+		<input type="button" value="Edit service list"
+			   onclick="window.location.href='services/editServiceList'; return false;"
 			   class="add-button"
 		/>
 	</security:authorize>
 
 	
-	<security:authorize access="hasRole('ADMIN')">  
+	<security:authorize access="hasRole('ADMIN')">
 
 	</security:authorize>
 	
 	<hr>
-		<h3>Choose the service</h3>
+		<h3>Service List</h3>
 		<table>
 			<tr>
-				<th><a>Usługa</a></th>
-				<th><a>Cena</a></th>
-				<th><a>Czas trwania</a></th>
+				<th><a>Service</a></th>
+				<th><a>Price</a></th>
+				<th><a>Duration</a></th>
 			</tr>
 
 		<c:forEach var="tempService" items="${services}">
