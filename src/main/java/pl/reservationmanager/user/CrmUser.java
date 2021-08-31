@@ -35,6 +35,7 @@ public class CrmUser {
     @Size(min = 1, message = "is required")
     private String phoneNumber;
 
+
     public CrmUser() {
 
     }

@@ -28,8 +28,8 @@
 	</p>
 	<hr>
 	<security:authorize access="hasRole('MANAGER')">
-		<h3>Options</h3>
-		<br>
+		<h3>Manager options</h3>
+
 		<input type="button" value="Edit service list"
 			   onclick="window.location.href='services/editServiceList'; return false;"
 			   class="add-button"
@@ -38,7 +38,17 @@
 
 	
 	<security:authorize access="hasRole('ADMIN')">
-		
+		<h3>Admin options</h3>
+
+		<input type="button" value="Edit service list"
+			   onclick="window.location.href='services/editServiceList'; return false;"
+			   class="add-button"
+		/>
+
+		<input type="button" value="Edit accounts"
+			   onclick="window.location.href='user/list'; return false;"
+			   class="add-button"
+		/>
 	</security:authorize>
 	
 	<hr>

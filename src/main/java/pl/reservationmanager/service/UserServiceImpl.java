@@ -16,6 +16,7 @@ import pl.reservationmanager.user.CrmUser;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUsers() {
+        return userDao.getUsers();
+    }
+
+    @Override
     @Transactional
     public void save(CrmUser crmUser) {
         User user = new User();
@@ -56,6 +62,11 @@ public class UserServiceImpl implements UserService {
         user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_CUSTOMER")));
 
         userDao.save(user);
+    }
+
+    @Override
+    public void addRole(Long theId) {
+        userDao.update(theId);
     }
 
     @Override
