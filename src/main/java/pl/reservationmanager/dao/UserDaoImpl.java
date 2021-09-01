@@ -76,6 +76,9 @@ public class UserDaoImpl implements UserDao {
         if(selected.isEmpty()) {
             Query query = session.createSQLQuery("INSERT INTO users_role(user_id, role_id) VALUES (" + theId + ", 2)");
             query.executeUpdate();
+        } else {
+            Query query = session.createSQLQuery("DELETE FROM users_role WHERE user_id=" + theId + " AND role_id=2");
+            query.executeUpdate();
         }
 
     }
