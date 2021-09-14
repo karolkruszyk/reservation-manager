@@ -14,7 +14,7 @@
         <th><a>Last name</a></th>
         <th><a>Phone number</a></th>
         <th><a>Roles</a></th>
-        <th><a>Change Roles</a></th>
+        <th><a>Give/Take Manager Role</a></th>
     </tr>
     <c:forEach var="tempUser" items="${users}">
 
@@ -32,7 +32,7 @@
             </td>
             <td>
             <a href="${giveManagerRole}"
-               onclick="if (!(confirm('Are you sure?'))) return false">Give Manager Role</a></td>
+               onclick="if (!(confirm('Are you sure?'))) return false"><></a></td>
         </tr>
     </c:forEach>
 </table>

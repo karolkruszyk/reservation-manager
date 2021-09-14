@@ -1,13 +1,10 @@
 package pl.reservationmanager.dao;
 
-import com.mysql.cj.jdbc.JdbcConnection;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import pl.reservationmanager.entity.User;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package pl.reservationmanager.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import pl.reservationmanager.crm.CrmUser;
 import pl.reservationmanager.entity.User;
-import pl.reservationmanager.user.CrmUser;
 
 import java.util.List;
 

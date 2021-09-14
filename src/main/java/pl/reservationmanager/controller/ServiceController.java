@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.reservationmanager.crm.CrmService;
 import pl.reservationmanager.entity.Service;
 import pl.reservationmanager.service.ServiceService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Transactional
@@ -27,14 +33,25 @@ public class ServiceController {
 
     @RequestMapping("/showServiceForm")
     public String showServiceForm(Model theModel) {
-        Service newService = new Service();
-        theModel.addAttribute(newService);
+        theModel.addAttribute("crmService", new CrmService());
         return "add-service";
     }
 
     @RequestMapping("/processServiceForm")
-    public String processServiceForm(@ModelAttribute("service") Service theService) {
-        serviceService.addService(theService);
+    public String processServiceForm(@Valid @ModelAttribute("crmService") CrmService theCrmService, BindingResult bindingResult, Model theModel) {
+        if(bindingResult.hasErrors()) {
+            return "add-service";
+        }
+        serviceService.addService(theCrmService);
+        return "redirect:/services/editServiceList";
+    }
+
+    @RequestMapping("/processUpdateForm")
+    public String processUpdateForm(@Valid @ModelAttribute("crmService") CrmService theCrmService, BindingResult bindingResult, Model theModel) {
+        if(bindingResult.hasErrors()) {
+            return "update-service";
+        }
+        serviceService.updateService(theCrmService.getId(), theCrmService);
         return "redirect:/services/editServiceList";
     }
 
@@ -46,8 +63,15 @@ public class ServiceController {
 
     @GetMapping("/showUpdateForm")
     public String showUpdateForm(@RequestParam("serviceId") Long theId, Model theModel) {
-        Service theService = serviceService.getService(theId);
-        theModel.addAttribute("theService", theService);
+        CrmService crmService = new CrmService();
+        Service service = serviceService.getService(theId);
+
+        crmService.setId(service.getId());
+        crmService.setName(service.getName());
+        crmService.setDuration(service.getDuration().toString());
+        crmService.setPrice(service.getPrice().toString());
+
+        theModel.addAttribute("crmService", crmService);
         return "update-service";
     }
 

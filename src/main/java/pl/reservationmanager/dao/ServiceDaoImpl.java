@@ -44,7 +44,7 @@ public class ServiceDaoImpl implements ServiceDao{
     }
 
     @Override
-    public void addService(Service theService) {
+    public void saveOrUpdate(Service theService) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(theService);
     }
@@ -55,6 +55,8 @@ public class ServiceDaoImpl implements ServiceDao{
         Service theService = session.get(Service.class, theId);
         session.delete(theService);
     }
+
+
 
     @Override
     public Service getService(Long theId) {
