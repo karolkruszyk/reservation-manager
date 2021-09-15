@@ -58,14 +58,19 @@
 				<th><a>Service</a></th>
 				<th><a>Price</a></th>
 				<th><a>Duration</a></th>
+				<th><a>Choose service</a></th>
 			</tr>
 
 		<c:forEach var="tempService" items="${services}">
+			<c:url var="chooseService" value="/reserve/booking">
+				<c:param name="theId" value="${tempService.id}"/>
+			</c:url>
 
 			<tr>
 				<td>${tempService.name}</td>
 				<td>${tempService.price} zł</td>
 				<td>${tempService.duration} minut</td>
+				<td><a href="${chooseService}" ><></a></td>
 
 			</tr>
 		</c:forEach>
