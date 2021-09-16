@@ -52,4 +52,25 @@ public class ReservationController {
         return "booking-page";
     }
 
+    @RequestMapping("/makeReservation")
+    public String makeReservation(@RequestParam("date") String date,
+                                  @RequestParam("hour") String time,
+                                  @RequestParam("serviceId") Long serviceId,
+                                  Model theModel) {
+
+        LocalDate dateObj = LocalDate.parse(date);
+        LocalTime timeObj = LocalTime.parse(time);
+
+        theModel.addAttribute("service", serviceService.getService(serviceId));
+        theModel.addAttribute("date", dateObj);
+        theModel.addAttribute("time", timeObj);
+
+        return "confirm-reservation";
+    }
+
+    @RequestMapping("/processReservation")
+    public String processReservation(Model theModel) {
+        return "reservation-confirmation";
+    }
+
 }

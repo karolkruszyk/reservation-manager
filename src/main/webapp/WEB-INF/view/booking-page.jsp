@@ -23,7 +23,12 @@
         <c:forEach var = "tempHour" items="${workingHours}">
         <tr>
             <c:forEach var="tempDay" items="${datesToDisplay}">
-                <td>${tempHour}</td>
+                <c:url var = "reserve" value="/reserve/makeReservation">
+                    <c:param name="date" value="${tempDay}"/>
+                    <c:param name="hour" value="${tempHour}"/>
+                    <c:param name="serviceId" value="${service.id}"/>
+                </c:url>
+                <td><a href="${reserve}">${tempHour}<a/></td>
             </c:forEach>
         </tr>
         </c:forEach>
