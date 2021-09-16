@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 
 <html>
@@ -15,15 +16,22 @@ Price: ${service.price}
 <br>
 Duration: ${service.duration}
 <br><br>
-Date: ${date}
+Date: ${crmReservation.date}
 <br>
-Time: ${time}
+Time: ${crmReservation.time}
+<br>
+Your id: ${crmReservation.userId}
 
-<c:url var = "process" value="/reserve/processReservation">
-    <c:param name="service" value="${service}"/>
-    <c:param name="date" value="${date}"/>
-    <c:param name="time" value="${time}"/>
-</c:url>
+
+<form:form action="processReservation" modelAttribute="crmReservation" method="post">
+
+    <form:hidden path="userId" />
+    <form:hidden path="serviceId"/>
+    <form:hidden path="status"/>
+    <form:hidden path="date"/>
+    <form:hidden path="time"/>
+    <button type="submit">Make reservation</button>
+</form:form>
 
 
 </body>

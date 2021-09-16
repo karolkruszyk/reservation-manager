@@ -20,6 +20,8 @@ public class HomeController {
     public String showHome(Model theModel) {
         List<Service> services = serviceService.getServices();
         theModel.addAttribute("services", services);
+
+
         return "home";
     }
 

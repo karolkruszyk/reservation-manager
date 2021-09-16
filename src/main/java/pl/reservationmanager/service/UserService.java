@@ -15,4 +15,5 @@ public interface UserService extends UserDetailsService {
     void save(CrmUser crmUser);
 
     void addRole(Long theId);
+    Long getUserId();
 }

@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import pl.reservationmanager.entity.User;
 
@@ -78,5 +80,26 @@ public class UserDaoImpl implements UserDao {
             query.executeUpdate();
         }
 
+    }
+
+    public Long getUserId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Session session = sessionFactory.getCurrentSession();
+
+        Integer id;
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails)principal).getUsername();
+            Query query = session.createSQLQuery("SELECT id FROM user WHERE username='" + username + "'");
+
+            id = (Integer) query.getSingleResult();
+
+        } else {
+            String username = principal.toString();
+            Query query = session.createSQLQuery("SELECT id FROM user WHERE username=" + username);
+
+            id = (Integer) query.getSingleResult();
+        }
+
+        return id.longValue();
     }
 }

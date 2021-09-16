@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.reservationmanager.crm.CrmReservation;
 import pl.reservationmanager.entity.Service;
+import pl.reservationmanager.service.ReservationService;
 import pl.reservationmanager.service.ServiceService;
+import pl.reservationmanager.service.UserService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,6 +25,12 @@ public class ReservationController {
 
     @Autowired
     ServiceService serviceService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ReservationService reservationService;
 
     @RequestMapping("/booking")
     public String showBookingPage(@RequestParam("theId") Long theId, Model theModel){
@@ -61,15 +72,22 @@ public class ReservationController {
         LocalDate dateObj = LocalDate.parse(date);
         LocalTime timeObj = LocalTime.parse(time);
 
+        CrmReservation crmReservation = new CrmReservation();
+        crmReservation.setUserId(userService.getUserId());
+        crmReservation.setServiceId(serviceId);
+        crmReservation.setStatus("WAITING");
+        crmReservation.setDate(dateObj);
+        crmReservation.setTime(timeObj);
+
         theModel.addAttribute("service", serviceService.getService(serviceId));
-        theModel.addAttribute("date", dateObj);
-        theModel.addAttribute("time", timeObj);
+        theModel.addAttribute("crmReservation", crmReservation);
 
         return "confirm-reservation";
     }
 
     @RequestMapping("/processReservation")
-    public String processReservation(Model theModel) {
+    public String processReservation(@ModelAttribute("crmReservation") CrmReservation crmReservation, BindingResult bindingResult, Model theModel) {
+        reservationService.addReservation(crmReservation);
         return "reservation-confirmation";
     }
 
