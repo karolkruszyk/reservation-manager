@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(Long userId) {
+        return userDao.getUserById(userId);
+    }
+
+    @Override
     @Transactional
     public void save(CrmUser crmUser) {
         User user = new User();

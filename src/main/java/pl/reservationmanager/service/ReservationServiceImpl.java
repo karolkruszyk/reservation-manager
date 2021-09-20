@@ -29,6 +29,12 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
+    public List<Reservation> getReservations(String status) {
+        List<Reservation> reservations = reservationDao.getReservations(status);
+        return reservations;
+    }
+
+    @Override
     public void addReservation(CrmReservation crmReservation) {
         Reservation reservation = new Reservation();
         reservation.setUserId(crmReservation.getUserId());
@@ -41,5 +47,16 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public void deleteReservation(Long reservationId) {
         reservationDao.deleteReservation(reservationId);
+    }
+
+    @Override
+    public void confirmReservation(Long reservationId) {
+        Reservation reservation = reservationDao.getReservation(reservationId);
+        reservation.setStatus("CONFIRMED");
+    }
+
+    @Override
+    public List<Reservation> getUsersReservations(Long userId) {
+        return reservationDao.getUsersReservations(userId);
     }
 }

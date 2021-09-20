@@ -11,6 +11,7 @@ public interface UserService extends UserDetailsService {
     User findByUserName(String userName);
     User findByPhoneNumber(String phoneNumber);
     List<User> getUsers();
+    User getUserById(Long userId);
 
     void save(CrmUser crmUser);
 

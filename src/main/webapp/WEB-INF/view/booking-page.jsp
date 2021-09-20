@@ -18,6 +18,7 @@
             <c:forEach var = "tempDay" items="${datesToDisplay}">
                 <th>${tempDay}</th>
             </c:forEach>
+
         </tr>
 
         <c:forEach var = "tempHour" items="${workingHours}">
@@ -28,7 +29,14 @@
                     <c:param name="hour" value="${tempHour}"/>
                     <c:param name="serviceId" value="${service.id}"/>
                 </c:url>
-                <td><a href="${reserve}">${tempHour}<a/></td>
+
+                <c:if test="${tempDay == today && tempHour.isBefore(now)}">
+                    <td><a>${tempHour}<a/></td>
+                </c:if>
+                <c:if test="${tempDay != today || tempHour.isAfter(now)}">
+                    <td><a href="${reserve}">${tempHour}<a/></td>
+                </c:if>
+
             </c:forEach>
         </tr>
         </c:forEach>

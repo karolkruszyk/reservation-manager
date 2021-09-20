@@ -25,6 +25,10 @@
 		<br>
 		Phone number: ${user.phoneNumber}
 		<br>
+		<input type="button" value="Your reservations"
+			   onclick="window.location.href='reserve/userReservations'; return false;"
+			   class="add-button"
+		/>
 	</p>
 	<hr>
 	<security:authorize access="hasRole('MANAGER')">
@@ -34,6 +38,11 @@
 			   onclick="window.location.href='services/editServiceList'; return false;"
 			   class="add-button"
 		/>
+		<input type="button" value="Reservations"
+			   onclick="window.location.href='reserve/reservationList'; return false;"
+			   class="add-button"
+		/>
+		<hr>
 	</security:authorize>
 
 	
@@ -49,9 +58,10 @@
 			   onclick="window.location.href='user/list'; return false;"
 			   class="add-button"
 		/>
+		<hr>
 	</security:authorize>
 	
-	<hr>
+
 		<h3>Service List</h3>
 		<table>
 			<tr>

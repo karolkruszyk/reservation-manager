@@ -1,19 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: krusz
-  Date: 16.09.2021
-  Time: 17:10
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Reservation Confirmation</title>
 </head>
 <body>
+    Succesfully made a reservation
+    <br>
     ${crmReservation.date}
-    ${crmReservation.status}
-    ${crmReservation.serviceId}
+    <br>
     ${crmReservation.time}
+    <br>
+    <input type="button" value="Back to the Home Page"
+           onclick="window.location.href='${pageContext.request.contextPath}/'; return false;"
+           class="add-button"
+    />
 </body>
 </html>

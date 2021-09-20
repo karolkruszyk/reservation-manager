@@ -6,6 +6,11 @@
 <html>
 <head>
     <title>Edit Service List</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1>Edit service list</h1>

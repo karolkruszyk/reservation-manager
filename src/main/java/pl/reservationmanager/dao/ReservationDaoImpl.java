@@ -40,6 +40,15 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
+    public List<Reservation> getReservations(String status) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Reservation where status=:status", Reservation.class);
+        query.setParameter("status", status);
+        List<Reservation> reservations = query.getResultList();
+        return reservations;
+    }
+
+    @Override
     public void addReservation(Reservation reservation) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(reservation);
@@ -50,5 +59,15 @@ public class ReservationDaoImpl implements ReservationDao{
         Reservation reservation = getReservation(reservationId);
         Session session = sessionFactory.getCurrentSession();
         session.delete(reservation);
+    }
+
+    @Override
+    public List<Reservation> getUsersReservations(Long userId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Reservation where userId=:userId", Reservation.class);
+        query.setParameter("userId", userId);
+        List<Reservation> userReservations = query.getResultList();
+
+        return userReservations;
     }
 }
