@@ -16,7 +16,7 @@
     <table>
         <tr>
             <c:forEach var = "tempDay" items="${datesToDisplay}">
-                <th>${tempDay}</th>
+                <th>${tempDay.dayOfWeek} ${tempDay.dayOfMonth} ${tempDay.month} | </th>
             </c:forEach>
 
         </tr>
