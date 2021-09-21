@@ -61,6 +61,16 @@ public class ReservationController {
 
         }
 
+        List<Reservation> reservations = reservationService.getReservations();
+        List<LocalDateTime> reservationDates = new ArrayList<>();
+        for(Reservation reservation : reservations) {
+            reservationDates.add(reservation.getDateTime());
+        }
+
+        List<DetailedReservation> detailedReservations = getDetailedReservationList(reservations);
+
+        theModel.addAttribute("detailedReservations", detailedReservations);
+        theModel.addAttribute("reservationDates", reservationDates);
         theModel.addAttribute("now", LocalTime.now());
         theModel.addAttribute("today", LocalDate.now());
         theModel.addAttribute("workingHours", workingHours);
@@ -114,7 +124,7 @@ public class ReservationController {
 
 
         List<Reservation> reservations = new ArrayList<>();
-        if (status != null) {
+        if (status != null && status != "") {
             reservations = reservationService.getReservations(status);
         } else {
             reservations = reservationService.getReservations();

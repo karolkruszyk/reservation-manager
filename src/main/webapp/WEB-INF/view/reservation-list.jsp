@@ -13,6 +13,10 @@
     <c:url var="confirmedStatus" value="/reserve/reservationList">
         <c:param name="status" value="CONFIRMED" />
     </c:url>
+    <c:url var="all" value="/reserve/reservationList">
+        <c:param name="status" value="" />
+    </c:url>
+
 
     <input type="button" value="Waiting"
            onclick="window.location.href='${waitingStatus}'; return false;"
@@ -20,6 +24,10 @@
     />
     <input type="button" value="Confirmed"
            onclick="window.location.href='${confirmedStatus}'; return false;"
+           class="add-button"
+    />
+    <input type="button" value="All"
+           onclick="window.location.href='${all}'; return false;"
            class="add-button"
     />
     <br>
