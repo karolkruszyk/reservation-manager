@@ -61,7 +61,7 @@
                 <td>${tempReservation.service.name}</td>
                 <td>${tempReservation.service.price}</td>
                 <td>${tempReservation.service.duration}</td>
-                <td>${tempReservation.reservation.dateTime}</td>
+                <td>${tempReservation.reservation.dateTime.dayOfMonth}.${tempReservation.reservation.dateTime.monthValue}.${tempReservation.reservation.dateTime.year} ${tempReservation.reservation.dateTime.toLocalTime()}</td>
                 <td>${tempReservation.reservation.status}</td>
                 <td><a href="${confirmReservation}"
                        onclick="if (!(confirm('Are you sure?'))) return false">Accept</a></td>

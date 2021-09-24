@@ -33,7 +33,7 @@ public class ReservationDaoImpl implements ReservationDao{
     @Override
     public List<Reservation> getReservations() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Reservation", Reservation.class);
+        Query query = session.createQuery("from Reservation order by date", Reservation.class);
         List<Reservation> reservations = query.getResultList();
 
         return reservations;
@@ -42,7 +42,7 @@ public class ReservationDaoImpl implements ReservationDao{
     @Override
     public List<Reservation> getReservations(String status) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Reservation where status=:status", Reservation.class);
+        Query query = session.createQuery("from Reservation where status=:status order by date", Reservation.class);
         query.setParameter("status", status);
         List<Reservation> reservations = query.getResultList();
         return reservations;
@@ -64,7 +64,7 @@ public class ReservationDaoImpl implements ReservationDao{
     @Override
     public List<Reservation> getUsersReservations(Long userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Reservation where userId=:userId", Reservation.class);
+        Query query = session.createQuery("from Reservation where userId=:userId order by date", Reservation.class);
         query.setParameter("userId", userId);
         List<Reservation> userReservations = query.getResultList();
 
