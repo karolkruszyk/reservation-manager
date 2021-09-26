@@ -7,16 +7,15 @@
 </head>
 <body>
     <h1>Reservations</h1>
-    <c:url var="waitingStatus" value="/reserve/reservationList">
+    <c:url var="waitingStatus" value="/manager/reservationList">
         <c:param name="status" value="WAITING" />
     </c:url>
-    <c:url var="confirmedStatus" value="/reserve/reservationList">
+    <c:url var="confirmedStatus" value="/manager/reservationList">
         <c:param name="status" value="CONFIRMED" />
     </c:url>
-    <c:url var="all" value="/reserve/reservationList">
+    <c:url var="all" value="/manager/reservationList">
         <c:param name="status" value="" />
     </c:url>
-
 
     <input type="button" value="Waiting"
            onclick="window.location.href='${waitingStatus}'; return false;"
@@ -48,10 +47,10 @@
         </tr>
         <c:forEach var="tempReservation" items="${detailedReservations}">
 
-            <c:url var="confirmReservation" value="/reserve/confirm">
+            <c:url var="confirmReservation" value="/manager/confirmReservation">
                 <c:param name="reservationId" value="${tempReservation.reservation.reservationId}"/>
             </c:url>
-            <c:url var="rejectReservation" value="/reserve/reject">
+            <c:url var="rejectReservation" value="/manager/rejectReservation">
                 <c:param name="reservationId" value="${tempReservation.reservation.reservationId}"/>
             </c:url>
             <tr>

@@ -12,6 +12,7 @@
 
 <body>
 
+
 	<div class="text-courier-font">
 		<h2 class="title">Access Denied</h2>
 		<p>You are not authorized to access this resource.</p>

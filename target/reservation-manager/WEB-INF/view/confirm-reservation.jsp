@@ -22,7 +22,6 @@ Time: ${crmReservation.time}
 <br>
 Your id: ${crmReservation.userId}
 
-
 <form:form action="processReservation" modelAttribute="crmReservation" method="post">
 
     <form:hidden path="userId" />

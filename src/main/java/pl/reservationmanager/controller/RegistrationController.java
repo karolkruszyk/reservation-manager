@@ -20,6 +20,7 @@ import javax.validation.Valid;
 @RequestMapping("/register")
 public class RegistrationController {
 
+
     @Autowired
     private UserService userService;
 

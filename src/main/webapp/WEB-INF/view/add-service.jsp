@@ -22,7 +22,6 @@
 </head>
 <body>
 <div>
-
     <div id="loginbox" style="margin-top: 50px;"
          class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
 

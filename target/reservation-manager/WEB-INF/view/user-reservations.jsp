@@ -27,7 +27,6 @@
             </tr>
         </c:forEach>
 
-
 </table>
 <br>
 <input type="button" value="Back to the Home Page"

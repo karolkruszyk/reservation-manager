@@ -17,8 +17,7 @@
         <th><a>Give/Take Manager Role</a></th>
     </tr>
     <c:forEach var="tempUser" items="${users}">
-
-        <c:url var="giveManagerRole" value="/user/giveManagerRole">
+        <c:url var="giveManagerRole" value="/admin/giveManagerRole">
             <c:param name="theId" value="${tempUser.id}"/>
         </c:url>
 
