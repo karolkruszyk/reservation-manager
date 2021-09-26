@@ -56,7 +56,8 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public List<Reservation> getUsersReservations(Long userId) {
+    public List<Reservation> getUserReservations(Long userId) {
         return reservationDao.getUsersReservations(userId);
     }
+
 }

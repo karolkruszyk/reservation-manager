@@ -20,38 +20,26 @@
             </c:forEach>
 
         </tr>
+                <c:forEach var="tempHour" items="${workingHours}">
+                    <tr>
+                    <c:forEach var="tempDay" items="${datesToDisplay}">
+                        <c:url var = "reserve" value="/customer/makeReservation">
+                            <c:param name="date" value="${tempDay}"/>
+                            <c:param name="hour" value="${tempHour}"/>
+                            <c:param name="serviceId" value="${service.id}"/>
+                        </c:url>
 
-        <c:forEach var = "tempHour" items="${workingHours}">
-        <tr>
-            <c:forEach var="tempDay" items="${datesToDisplay}">
-                <c:set var="printed" value="false"/>
-                <c:url var = "reserve" value="/reserve/makeReservation">
-                    <c:param name="date" value="${tempDay}"/>
-                    <c:param name="hour" value="${tempHour}"/>
-                    <c:param name="serviceId" value="${service.id}"/>
-                </c:url>
+                        <c:if test="${map.get(tempDay).contains(tempHour)}">
+                            <td><a href="${reserve}">${tempHour}<a/></td>
+                        </c:if>
+                        <c:if test="${!map.get(tempDay).contains(tempHour)}">
+                            <td><a>--:--<a/></td>
+                        </c:if>
 
-                <c:forEach var="tempDetailedReservation" items="${detailedReservations}">
-                    <c:if test="${tempDetailedReservation.reservation.dateTime.toLocalDate() == tempDay && tempHour.isBefore(tempDetailedReservation.reservation.dateTime.toLocalTime().plusMinutes(tempDetailedReservation.service.duration + 1)) && tempHour.isAfter(tempDetailedReservation.reservation.dateTime.toLocalTime().minusMinutes(1))}">
-                        <td><a>--:--<a/></td>
-                        <c:set var="printed" value="true"/>
-                    </c:if>
+                    </c:forEach>
+                </tr>
+
                 </c:forEach>
-
-                <c:if test="${printed != true}">
-                    <c:if test="${tempDay == today && tempHour.isBefore(now)}">
-                        <td><a>--:--<a/></td>
-                    </c:if>
-
-                    <c:if test="${tempDay != today || tempHour.isAfter(now)}">
-                        <td><a href="${reserve}">${tempHour}<a/></td>
-                    </c:if>
-                </c:if>
-
-
-            </c:forEach>
-        </tr>
-        </c:forEach>
 
     </table>
 

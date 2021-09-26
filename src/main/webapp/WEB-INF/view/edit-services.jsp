@@ -28,12 +28,13 @@
             <th><a>Action</a></th>
         </tr>
 
+
         <c:forEach var="tempService" items="${services}">
-            <c:url var="updateLink" value="/services/showUpdateForm">
+            <c:url var="updateLink" value="/admin/showUpdateServiceForm">
                 <c:param name="serviceId" value="${tempService.id}"/>
             </c:url>
 
-            <c:url var="deleteLink" value="/services/delete">
+            <c:url var="deleteLink" value="/admin/deleteService">
                 <c:param name="serviceId" value="${tempService.id}"/>
             </c:url>
             <tr>

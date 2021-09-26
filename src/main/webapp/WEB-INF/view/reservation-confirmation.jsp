@@ -4,7 +4,7 @@
     <title>Reservation Confirmation</title>
 </head>
 <body>
-    Succesfully made a reservation
+    Successfully made a reservation
     <br>
     ${crmReservation.date}
     <br>
@@ -16,3 +16,4 @@
     />
 </body>
 </html>
+

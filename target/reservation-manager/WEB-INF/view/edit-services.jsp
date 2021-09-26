@@ -6,6 +6,11 @@
 <html>
 <head>
     <title>Edit Service List</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1>Edit service list</h1>
@@ -23,12 +28,13 @@
             <th><a>Action</a></th>
         </tr>
 
+
         <c:forEach var="tempService" items="${services}">
-            <c:url var="updateLink" value="/services/showUpdateForm">
+            <c:url var="updateLink" value="/admin/showUpdateServiceForm">
                 <c:param name="serviceId" value="${tempService.id}"/>
             </c:url>
 
-            <c:url var="deleteLink" value="/services/delete">
+            <c:url var="deleteLink" value="/admin/deleteService">
                 <c:param name="serviceId" value="${tempService.id}"/>
             </c:url>
             <tr>

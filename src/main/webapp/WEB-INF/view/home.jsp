@@ -12,21 +12,15 @@
 <body>
 	<h2>Reservation Manager - Home Page</h2>
 	<hr>
-	
+
+
 	<p>
-		<h3>Your account details</h3>
-		User: <security:authentication property="principal.username" />
-		<br>
-		Role(s): <security:authentication property="principal.authorities" />
-		<br>
-		First name: ${user.firstName}
-		<br>
-		Last name: ${user.lastName}
-		<br>
-		Phone number: ${user.phoneNumber}
-		<br>
-		<input type="button" value="Your reservations"
-			   onclick="window.location.href='reserve/userReservations'; return false;"
+
+	<input type="button" value="My account"
+		   onclick="window.location.href='customer/accountDetails'; return false;"/>
+
+	<input type="button" value="My reservations"
+			   onclick="window.location.href='customer/userReservations'; return false;"
 			   class="add-button"
 		/>
 	</p>
@@ -34,12 +28,8 @@
 	<security:authorize access="hasRole('MANAGER')">
 		<h3>Manager options</h3>
 
-		<input type="button" value="Edit service list"
-			   onclick="window.location.href='services/editServiceList'; return false;"
-			   class="add-button"
-		/>
 		<input type="button" value="Reservations"
-			   onclick="window.location.href='reserve/reservationList'; return false;"
+			   onclick="window.location.href='manager/reservationList'; return false;"
 			   class="add-button"
 		/>
 		<hr>
@@ -50,12 +40,12 @@
 		<h3>Admin options</h3>
 
 		<input type="button" value="Edit service list"
-			   onclick="window.location.href='services/editServiceList'; return false;"
+			   onclick="window.location.href='admin/editServiceList'; return false;"
 			   class="add-button"
 		/>
 
 		<input type="button" value="Edit accounts"
-			   onclick="window.location.href='user/list'; return false;"
+			   onclick="window.location.href='admin/listUsers'; return false;"
 			   class="add-button"
 		/>
 		<hr>
@@ -72,7 +62,7 @@
 			</tr>
 
 		<c:forEach var="tempService" items="${services}">
-			<c:url var="chooseService" value="/reserve/booking">
+			<c:url var="chooseService" value="/customer/bookingPage">
 				<c:param name="theId" value="${tempService.id}"/>
 			</c:url>
 

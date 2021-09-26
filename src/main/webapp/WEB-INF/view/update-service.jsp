@@ -22,6 +22,7 @@
 <body>
 <div>
 
+
     <div id="loginbox" style="margin-top: 50px;"
          class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
 
@@ -33,7 +34,7 @@
 
             <div style="padding-top: 30px" class="panel-body">
 
-                <form:form action="processUpdateForm" modelAttribute="crmService" method="POST" class="form-horizontal">
+                <form:form action="processUpdateServiceForm" modelAttribute="crmService" method="POST" class="form-horizontal">
                     <form:hidden path="id"/>
 
                     <div class="form-group">
