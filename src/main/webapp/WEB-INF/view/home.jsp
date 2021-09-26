@@ -70,7 +70,7 @@
 				<td>${tempService.name}</td>
 				<td>${tempService.price} zł</td>
 				<td>${tempService.duration} minut</td>
-				<td><a href="${chooseService}" ><></a></td>
+				<td><a href="${chooseService}" ><button type="submit">choose</button></a></td>
 
 			</tr>
 		</c:forEach>

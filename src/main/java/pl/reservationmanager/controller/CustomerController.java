@@ -92,27 +92,28 @@ public class CustomerController {
         for(DetailedReservation detailedReservation : detailedReservations) {
             for(LocalDate date : dateTimeMap.keySet()) {
 
+                List<LocalTime> toDelete = new ArrayList<>();
+                if(detailedReservation.getReservation().getDateTime().toLocalDate().equals(date)) {
 
-
-                if(detailedReservation.getReservation().getDateTime().toLocalDate().equals(date) || date.equals(LocalDate.now())) {
-                    List<LocalTime> toDelete = new ArrayList<>();
-                    for(int i = detailedReservation.getService().getDuration(); i>=0; i-=skipMinutes) {
+                    for (int i = detailedReservation.getService().getDuration(); i >= 0; i -= skipMinutes) {
                         toDelete.add(detailedReservation.getReservation().getDateTime().toLocalTime().plusMinutes(i));
                     }
-                    for (int i = service.getDuration(); i>=0; i-=skipMinutes) {
+                    for (int i = service.getDuration(); i >= 0; i -= skipMinutes) {
                         toDelete.add(detailedReservation.getReservation().getDateTime().toLocalTime().minusMinutes(i));
                     }
+                }
 
-                    if(date.equals(LocalDate.now())) {
-                        List<LocalTime> hoursToDelete = new ArrayList<>();
-                        if(startingTime.isBefore(LocalTime.now())) {
-                            hoursToDelete.add(startingTime);
-                            while(hoursToDelete.get(hoursToDelete.size()-1).isBefore(LocalTime.now())) {
-                                hoursToDelete.add(hoursToDelete.get(hoursToDelete.size()-1).plusMinutes(skipMinutes));
-                            }
-                            toDelete.addAll(hoursToDelete);
+                if(date.equals(LocalDate.now())) {
+                    List<LocalTime> hoursToDelete = new ArrayList<>();
+                    if(startingTime.isBefore(LocalTime.now())) {
+                        hoursToDelete.add(startingTime);
+                        while(hoursToDelete.get(hoursToDelete.size()-1).isBefore(LocalTime.now())) {
+
+                            hoursToDelete.add(hoursToDelete.get(hoursToDelete.size()-1).plusMinutes(skipMinutes));
                         }
+                        toDelete.addAll(hoursToDelete);
                     }
+                }
 
                     List<LocalTime> editedList = new ArrayList<>(dateTimeMap.get(date));
 
@@ -120,13 +121,11 @@ public class CustomerController {
                         editedList.remove(varToDelete);
                     }
                     dateTimeMap.replace(date, editedList);
-                }
             }
         }
 
+        System.out.println(LocalTime.now());
 
-
-        System.out.println(dateTimeMap);
         theModel.addAttribute("map", dateTimeMap);
 
 

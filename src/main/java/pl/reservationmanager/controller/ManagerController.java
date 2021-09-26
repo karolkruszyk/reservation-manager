@@ -60,13 +60,13 @@ public class ManagerController {
     @RequestMapping("/confirmReservation")
     public String confirmReservation(@RequestParam("reservationId") Long reservationId, Model theModel) {
         reservationService.confirmReservation(reservationId);
-        return "redirect:/manager/reservationList";
+        return "redirect:/manager/reservationList?status=WAITING";
     }
 
     @RequestMapping("/rejectReservation")
     public String rejectReservation(@RequestParam("reservationId") Long reservationId, Model theModel) {
         reservationService.deleteReservation(reservationId);
-        return "redirect:/manager/reservationList";
+        return "redirect:/manager/reservationList?status=WAITING";
     }
 
 
