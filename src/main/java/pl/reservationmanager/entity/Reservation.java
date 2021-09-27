@@ -24,22 +24,32 @@ public class Reservation {
     @Column(name="date")
     private LocalDateTime dateTime;
 
+    @Column(name="no_account_name")
+    private String noAccountName;
+
+    @Column(name="no_account_phone")
+    private String noAccountPhone;
+
     public Reservation() {
     }
 
-    public Reservation(Long reservationId, Long userId, Long serviceId, String status, LocalDateTime dateTime) {
+    public Reservation(Long reservationId, Long userId, Long serviceId, String status, LocalDateTime dateTime, String noAccountName, String noAccountPhone) {
         this.reservationId = reservationId;
         this.userId = userId;
         this.serviceId = serviceId;
         this.status = status;
         this.dateTime = dateTime;
+        this.noAccountName = noAccountName;
+        this.noAccountPhone = noAccountPhone;
     }
 
-    public Reservation(Long userId, Long serviceId, String status, LocalDateTime dateTime) {
+    public Reservation(Long userId, Long serviceId, String status, LocalDateTime dateTime, String noAccountName, String noAccountPhone) {
         this.userId = userId;
         this.serviceId = serviceId;
         this.status = status;
         this.dateTime = dateTime;
+        this.noAccountPhone = noAccountPhone;
+        this.noAccountName = noAccountName;
     }
 
     public Long getReservationId() {
@@ -80,6 +90,22 @@ public class Reservation {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getNoAccountName() {
+        return noAccountName;
+    }
+
+    public void setNoAccountName(String noAccountName) {
+        this.noAccountName = noAccountName;
+    }
+
+    public String getNoAccountPhone() {
+        return noAccountPhone;
+    }
+
+    public void setNoAccountPhone(String noAccountPhone) {
+        this.noAccountPhone = noAccountPhone;
     }
 
     @Override

@@ -160,7 +160,6 @@ public class CustomerController {
         CrmReservation crmReservation = new CrmReservation();
         crmReservation.setUserId(userService.getUserId());
         crmReservation.setServiceId(serviceId);
-        crmReservation.setStatus("WAITING");
         crmReservation.setDate(dateObj);
         crmReservation.setTime(timeObj);
 
@@ -172,6 +171,9 @@ public class CustomerController {
 
     @RequestMapping("/processReservation")
     public String processReservation(@ModelAttribute("crmReservation") CrmReservation crmReservation, BindingResult bindingResult, Model theModel) {
+        if(crmReservation.getStatus() == null) {
+            crmReservation.setStatus("WAITING");
+        }
         reservationService.addReservation(crmReservation);
         return "reservation-confirmation";
     }

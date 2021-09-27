@@ -11,6 +11,8 @@ public class CrmReservation {
     private String status;
     private LocalDate date;
     private LocalTime time;
+    private String noAccountName;
+    private String noAccountPhone;
 
     public CrmReservation() {
     }
@@ -61,5 +63,21 @@ public class CrmReservation {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public String getNoAccountName() {
+        return noAccountName;
+    }
+
+    public void setNoAccountName(String noAccountName) {
+        this.noAccountName = noAccountName;
+    }
+
+    public String getNoAccountPhone() {
+        return noAccountPhone;
+    }
+
+    public void setNoAccountPhone(String noAccountPhone) {
+        this.noAccountPhone = noAccountPhone;
     }
 }

@@ -34,16 +34,15 @@
 
         <tr>
 
-            <th><a>first name</a></th>
-            <th><a>last name</a></th>
-            <th><a>phone number</a></th>
-            <th><a>service</a></th>
-            <th><a>price</a></th>
-            <th><a>duration</a></th>
-            <th><a>date</a></th>
-            <th><a>status</a></th>
-            <th><a>action</a></th>
-
+            <th><a>Name</a></th>
+            <th><a>Phone number</a></th>
+            <th><a>Service</a></th>
+            <th><a>Price</a></th>
+            <th><a>Duration</a></th>
+            <th><a>Date</a></th>
+            <th><a>Status</a></th>
+            <th><a>Action</a></th>
+            <th><a>Reservation by</a></th>
         </tr>
         <c:forEach var="tempReservation" items="${detailedReservations}">
 
@@ -54,18 +53,30 @@
                 <c:param name="reservationId" value="${tempReservation.reservation.reservationId}"/>
             </c:url>
             <tr>
-                <td>${tempReservation.user.firstName}</td>
-                <td>${tempReservation.user.lastName}</td>
-                <td>${tempReservation.user.phoneNumber}</td>
+                <c:if test="${tempReservation.reservation.noAccountName == null}">
+                    <td>${tempReservation.user.firstName} ${tempReservation.user.lastName}</td>
+                </c:if>
+                <c:if test="${tempReservation.reservation.noAccountName != null}">
+                    <td>${tempReservation.reservation.noAccountName}</td>
+                </c:if>
+                <c:if test="${tempReservation.reservation.noAccountPhone != null}">
+                    <td>${tempReservation.reservation.noAccountPhone}</td>
+                </c:if>
+                <c:if test="${tempReservation.reservation.noAccountName == null}">
+                    <td>${tempReservation.user.phoneNumber}</td>
+                </c:if>
                 <td>${tempReservation.service.name}</td>
                 <td>${tempReservation.service.price}</td>
                 <td>${tempReservation.service.duration}</td>
                 <td>${tempReservation.reservation.dateTime.dayOfMonth}.${tempReservation.reservation.dateTime.monthValue}.${tempReservation.reservation.dateTime.year} ${tempReservation.reservation.dateTime.toLocalTime()}</td>
                 <td>${tempReservation.reservation.status}</td>
                 <td><a href="${confirmReservation}"
-                       onclick="if (!(confirm('Are you sure?'))) return false">Accept</a></td>
-                <td><a href="${rejectReservation}"
+                       onclick="if (!(confirm('Are you sure?'))) return false">Accept</a> |
+                    <a href="${rejectReservation}"
                        onclick="if (!(confirm('Are you sure?'))) return false">Reject</a></td>
+                <c:if test="${tempReservation.reservation.noAccountName != null}">
+                    <td>${tempReservation.user.firstName} ${tempReservation.user.lastName}</td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>

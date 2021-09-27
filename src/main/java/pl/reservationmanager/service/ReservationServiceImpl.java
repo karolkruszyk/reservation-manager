@@ -41,6 +41,8 @@ public class ReservationServiceImpl implements ReservationService{
         reservation.setServiceId(crmReservation.getServiceId());
         reservation.setStatus(crmReservation.getStatus());
         reservation.setDateTime(LocalDateTime.of(crmReservation.getDate(), crmReservation.getTime()));
+        reservation.setNoAccountName(crmReservation.getNoAccountName());
+        reservation.setNoAccountPhone(crmReservation.getNoAccountPhone());
         reservationDao.addReservation(reservation);
     }
 

@@ -58,7 +58,7 @@
 				<th><a>Service</a></th>
 				<th><a>Price</a></th>
 				<th><a>Duration</a></th>
-				<th><a>Choose service</a></th>
+				<th><a>Choose</a></th>
 			</tr>
 
 		<c:forEach var="tempService" items="${services}">

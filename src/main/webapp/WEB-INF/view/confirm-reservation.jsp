@@ -19,16 +19,25 @@ Duration: ${service.duration}
 Date: ${crmReservation.date}
 <br>
 Time: ${crmReservation.time}
-<br>
-Your id: ${crmReservation.userId}
+
 
 <form:form action="processReservation" modelAttribute="crmReservation" method="post">
+    <security:authorize access="hasRole('MANAGER')">
+        <br>
+        <form:input path="noAccountName" placeholder="Customer name"/>
+        <br>
+        <form:input path="noAccountPhone" placeholder="Customer phone"/>
+        <br><br>
+        <form:checkbox path="status"  value="CONFIRMED" /> Confirm
+        <br><br>
+    </security:authorize>
 
     <form:hidden path="userId" />
     <form:hidden path="serviceId"/>
-    <form:hidden path="status"/>
     <form:hidden path="date"/>
     <form:hidden path="time"/>
+
+            
     <button type="submit">Make reservation</button>
 </form:form>
 
