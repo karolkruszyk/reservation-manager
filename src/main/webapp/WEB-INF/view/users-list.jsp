@@ -31,7 +31,7 @@
             </td>
             <td>
             <a href="${giveManagerRole}"
-               onclick="if (!(confirm('Are you sure?'))) return false"><></a></td>
+               onclick="if (!(confirm('Are you sure?'))) return false"><button>Give / Take</button></a></td>
         </tr>
     </c:forEach>
 </table>

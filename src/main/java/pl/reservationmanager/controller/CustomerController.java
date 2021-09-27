@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.reservationmanager.crm.CrmReservation;
+import pl.reservationmanager.crm.CrmUser;
 import pl.reservationmanager.entity.Reservation;
 import pl.reservationmanager.entity.Service;
 import pl.reservationmanager.entity.User;
@@ -40,6 +41,21 @@ public class CustomerController {
     public String accountDetails(Model theModel) {
         theModel.addAttribute("user", userService.getUserById(userService.getUserId()));
         return "account-details";
+    }
+
+    @RequestMapping("/changePhoneNumber")
+    public String changePhoneNumber(@RequestParam("userId") Long userId, Model theModel) {
+        theModel.addAttribute(new CrmUser());
+        User user = userService.getUserById(userId);
+        theModel.addAttribute(user);
+        return "change-phone";
+    }
+
+    @RequestMapping("/processPhoneNumberForm")
+    public String processPhoneNumberForm(@ModelAttribute("crmUser") CrmUser crmUser, Model theModel) {
+        User theUser = userService.getUserById(userService.getUserId());
+        theUser.setPhoneNumber(crmUser.getPhoneNumber());
+        return "redirect:/customer/accountDetails";
     }
 
     @RequestMapping("/bookingPage")
@@ -95,10 +111,10 @@ public class CustomerController {
                 List<LocalTime> toDelete = new ArrayList<>();
                 if(detailedReservation.getReservation().getDateTime().toLocalDate().equals(date)) {
 
-                    for (int i = detailedReservation.getService().getDuration(); i >= 0; i -= skipMinutes) {
+                    for (int i = detailedReservation.getService().getDuration()-1; i >= 0; i -= 1) {
                         toDelete.add(detailedReservation.getReservation().getDateTime().toLocalTime().plusMinutes(i));
                     }
-                    for (int i = service.getDuration(); i >= 0; i -= skipMinutes) {
+                    for (int i = service.getDuration()-1; i >= 0; i -= 1) {
                         toDelete.add(detailedReservation.getReservation().getDateTime().toLocalTime().minusMinutes(i));
                     }
                 }
